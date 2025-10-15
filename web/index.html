@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kampus Reminder</title>
+    <!-- Menggunakan Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Menggunakan Google Fonts "Inter" -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Menggunakan Flatpickr untuk input tanggal/deadline -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- Link ke file CSS kustom -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- ===== HALAMAN LOGIN ===== -->
+    <div id="login-page" class="page page-active flex items-center justify-center min-h-screen p-4">
+        <div class="w-full max-w-sm mx-auto bg-white p-8 rounded-2xl shadow-lg text-center">
+            <div class="flex justify-center mb-6">
+                <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center">
+                    <svg class="w-12 h-12 text-[#0E4299]" xmlns="http://www.w.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-2.072-2.072a50.57 50.57 0 01-2.254-2.254c.499.052.998.097 1.5.141a59.902 59.902 0 018.046 2.058M6.75 16.5c.249.045.498.086.75.124a59.902 59.902 0 018.046-2.058c.502-.044 1.001-.09 1.5-.141l-2.072 2.072a50.57 50.57 0 01-2.254 2.254M12 20.904c-1.332 0-2.655-.16-3.952-.464" />
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">Kampus Reminder</h1>
+            <p class="text-gray-500 mb-8">Masuk untuk melanjutkan</p>
+            
+            <input type="email" placeholder="Email" class="w-full px-4 py-3 border border-gray-200 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-[#0E4299]">
+            <input type="password" placeholder="Kata Sandi" class="w-full px-4 py-3 border border-gray-200 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-[#0E4299]">
+            
+            <div class="flex rounded-lg overflow-hidden mb-4">
+                <button onclick="login()" class="w-1/2 bg-[#0E4299] text-white py-3 font-semibold hover:bg-opacity-90 transition-colors">Masuk</button>
+                <button class="w-1/2 bg-gray-200 text-gray-700 py-3 font-semibold hover:bg-gray-300 transition-colors">Daftar</button>
+            </div>
+            
+            <button class="w-full flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px"><path fill="#fbc02d" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12	s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20	s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#e53935" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039	l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4caf50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36	c-5.222,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1565c0" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574l6.19,5.238	C42.012,35.836,44,30.138,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
+                Lanjutkan dengan Google
+            </button>
+        </div>
+    </div>
+    
+    <!-- ===== WRAPPER APLIKASI UTAMA ===== -->
+    <div id="app-wrapper" class="hidden max-w-4xl mx-auto">
+        <!-- ===== HALAMAN DASHBOARD ===== -->
+        <div id="dashboard-page" class="page p-4 pb-24">
+            <header class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Kampus Reminder</h1>
+                    <p class="text-gray-500">Oktober 2025</p>
+                </div>
+                <button class="relative p-2 rounded-full hover:bg-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 00-5-5.917V5a1 1 0 10-2 0v.083A6 6 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+                </button>
+            </header>
+
+            <!-- Kalender -->
+            <div id="calendar-container" class="bg-white p-4 rounded-2xl shadow-sm mb-6"></div>
+
+            <!-- Tombol Navigasi Cepat -->
+            <div class="grid grid-cols-4 gap-3 mb-6">
+                <button onclick="showPage('groups-page')" class="text-center p-3 bg-white rounded-2xl shadow-sm hover:bg-gray-50">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-2">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    </div>
+                    <span class="text-sm font-medium text-gray-700">Grup</span>
+                </button>
+                <button class="text-center p-3 bg-white rounded-2xl shadow-sm hover:bg-gray-50">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mx-auto mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    </div>
+                    <span class="text-sm font-medium text-gray-700">Jadwal</span>
+                </button>
+                <button class="text-center p-3 bg-white rounded-2xl shadow-sm hover:bg-gray-50">
+                     <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mx-auto mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 00-5-5.917V5a1 1 0 10-2 0v.083A6 6 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                    </div>
+                    <span class="text-sm font-medium text-gray-700">Notif</span>
+                </button>
+                 <button onclick="showPage('add-task-page')" class="text-center p-3 bg-white rounded-2xl shadow-sm hover:bg-gray-50">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mx-auto mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                    </div>
+                    <span class="text-sm font-medium text-gray-700">Tugas</span>
+                </button>
+            </div>
+
+            <!-- Daftar Task -->
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Task</h2>
+            <div id="task-list" class="space-y-3">
+                <!-- Task items will be injected here by JavaScript -->
+            </div>
+
+            <!-- Floating Action Button -->
+            <button onclick="showPage('add-task-page')" class="fab w-14 h-14 bg-[#0E4299] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transform hover:scale-105 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- ===== HALAMAN GRUP KELAS ===== -->
+        <div id="groups-page" class="page p-4 pb-24">
+            <header class="flex items-center gap-4 mb-6">
+                <button onclick="showPage('dashboard-page')" class="p-2 rounded-full hover:bg-gray-200">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+                <h1 class="text-xl font-bold text-gray-800">Grup Kelas</h1>
+            </header>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <button class="w-full bg-[#0E4299] text-white font-semibold py-3 px-4 rounded-xl shadow-sm flex items-center justify-center gap-2 hover:bg-opacity-90 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                    Buat Grup
+                </button>
+                <button class="w-full bg-white text-gray-700 font-semibold py-3 px-4 rounded-xl shadow-sm flex items-center justify-center gap-2 hover:bg-gray-50 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 11a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1v-1z" /></svg>
+                    Gabung
+                </button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex border-b border-gray-200 mb-4">
+                <button class="flex-1 py-3 text-center text-gray-500 border-b-2 border-transparent tab-active">Grup Saya</button>
+                <button class="flex-1 py-3 text-center text-gray-500 border-b-2 border-transparent">Tugas Dibagikan</button>
+            </div>
+
+            <!-- Daftar Grup -->
+            <div id="group-list" class="space-y-4">
+                <!-- Group items will be injected here -->
+            </div>
+        </div>
+
+        <!-- ===== HALAMAN TAMBAH TUGAS ===== -->
+        <div id="add-task-page" class="page p-4 pb-24">
+             <header class="flex items-center gap-4 mb-6">
+                <button onclick="showPage('dashboard-page')" class="p-2 rounded-full hover:bg-gray-200">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+                <h1 class="text-xl font-bold text-gray-800">Tambah Tugas</h1>
+            </header>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm space-y-6">
+                <div>
+                    <label class="text-sm font-medium text-gray-600 mb-1 block">Judul Tugas</label>
+                    <input id="task-title" type="text" placeholder="Contoh: Tugas Algoritma Searching" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0E4299]">
+                </div>
+
+                <div>
+                    <label class="text-sm font-medium text-gray-600 mb-1 block">Mata Kuliah</label>
+                    <select id="task-course" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0E4299] appearance-none">
+                        <!-- Options will be injected here -->
+                    </select>
+                </div>
+
+                 <div>
+                    <label class="text-sm font-medium text-gray-600 mb-1 block">Deskripsi</label>
+                    <textarea id="task-description" placeholder="Jelaskan detail tugas, requirements, atau catatan penting..." rows="4" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0E4299]"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                     <div>
+                        <label class="text-sm font-medium text-gray-600 mb-1 block">Deadline</label>
+                        <input id="task-deadline" type="text" placeholder="Pilih tanggal deadline" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0E4299]">
+                    </div>
+                     <div>
+                        <label class="text-sm font-medium text-gray-600 mb-1 block">Prioritas</label>
+                        <select id="task-priority" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0E4299] appearance-none">
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-sm font-medium text-gray-600 mb-2 block">Pengaturan Reminder</label>
+                    <div class="flex gap-2">
+                        <button class="reminder-btn flex-1 py-2 px-3 bg-gray-100 text-gray-700 rounded-lg text-sm transition">H-3</button>
+                        <button class="reminder-btn flex-1 py-2 px-3 bg-gray-100 text-gray-700 rounded-lg text-sm transition">H-1</button>
+                        <button class="reminder-btn flex-1 py-2 px-3 bg-[#0E4299] text-white rounded-lg text-sm transition">H-3 jam</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-sm font-medium text-gray-600 mb-2 block">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1" viewBox="0 0 20 20" fill="currentColor"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" /></svg>
+                        Bagikan ke Grup (Opsional)
+                    </label>
+                    <div id="share-group-list" class="space-y-3">
+                       <!-- Share group options will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                 <button onclick="handleAddTask()" class="w-full bg-[#0E4299] text-white font-bold py-4 px-4 rounded-xl shadow-lg hover:bg-opacity-90 transition flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                    Tambah Tugas
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menggunakan Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Link ke file JavaScript kustom -->
+    <script src="script.js"></script>
+</body>
+</html>
+

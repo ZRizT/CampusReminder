@@ -1,0 +1,46 @@
+/* Custom styles */
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-tap-highlight-color: transparent; /* Mencegah highlight biru saat di-tap di mobile */
+}
+
+.page {
+    display: none; /* Semua halaman disembunyikan secara default */
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.page-active {
+    display: block; /* Halaman aktif akan ditampilkan */
+}
+
+.tab-active {
+    border-color: #0E4299;
+    color: #0E4299;
+    font-weight: 600;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 1.5rem;
+    z-index: 50;
+}
+
+/* Style untuk flatpickr (kalender) agar sesuai tema */
+.flatpickr-calendar {
+    font-family: 'Inter', sans-serif;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.flatpickr-day.selected, 
+.flatpickr-day.startRange, 
+.flatpickr-day.endRange {
+    background: #0E4299;
+    border-color: #0E4299;
+}
